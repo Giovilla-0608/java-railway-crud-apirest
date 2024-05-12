@@ -1,6 +1,6 @@
 FROM eclipse-temurin:21-jdk as build
 
-COPY ./app
+COPY . /app
 wORKDIR /app
 
 RUN chmod +x mvnw
@@ -12,7 +12,7 @@ FROM eclipse-temurin:21-jre
 ARG PORT
 ENV PORT=${PORT}
 
-COPY --from-build /app/app.jar .
+COPY --from=build /app/app.jar .
 
 RUN useradd runtime
 USER runtime
